@@ -13,9 +13,11 @@ $objUsuario->setUniversal("senha", $_POST["senha"]);
 $dao = new UsuarioDAO();
 
 if($dao->inserir($objUsuario)){
-    echo "inserido com sucesso";
+    //echo "inserido com sucesso";
+    header("location:listar.php?sucesso=inserir");
 } else {
-    echo "errado com sucesso";
+    //echo "errado com sucesso";
+    header("location:inserir.php?erro=sim");
 }
 
 
