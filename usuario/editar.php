@@ -5,7 +5,7 @@ include_once "../class/usuarioDAO.class.php";
 
 $idusuario = $_GET["id"];
 $objUsuarioDAO = new UsuarioDAO();
-$retorno = $objUsuario->buscarPorId($idusuario);
+$retorno = $objUsuarioDAO->buscarPorId($idusuario);
 
 
 ?>
