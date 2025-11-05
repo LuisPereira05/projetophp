@@ -19,6 +19,16 @@ class UsuarioDAO{
         return $sql->execute();
     }
 
+    public function editar(usuario $usuario){
+        $sql = $this->conexao->prepare("
+        UPDATE usuario SET nome=:nome, email=:email, senha=:senha WHERE id=:id");
+        $sql->bindValue(":nome", $usuario->getUniversal("nome"));
+        $sql->bindValue(":email", $usuario->getUniversal("email"));
+        $sql->bindValue(":senha", $usuario->getUniversal("senha"));
+        $sql->bindValue(":id", $usuario->getUniversal("id"));
+        return $sql->execute();
+    }
+
     public function listar() {
         $sql = $this->conexao->prepare("
         SELECT * FROM usuario;");
@@ -26,6 +36,15 @@ class UsuarioDAO{
         $result = $sql->fetchAll(PDO::FETCH_ASSOC);
         return $result;
 
+    }
+
+    public function buscarPorId($id) {
+        $sql = $this->conexao->prepare(
+            "SELECT * FROM usuario WHERE id=:id"
+        );
+        $sql->bindValue(":id", $id);
+        $sql->execute();
+        return $sql->fetch();
     }
 }
 ?>

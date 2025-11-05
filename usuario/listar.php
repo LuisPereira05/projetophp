@@ -21,6 +21,8 @@ $retorno = $dao->listar();
                 <td><?=$linha['nome']?></td>
                 <td><?=$linha['email']?></td>
                 <td><?=$linha['senha']?></td>
+                <td><a href="editar.php?id=<?=$linha["id"]?>">Editar</a></td>
+                <td><a href="excluir.php?id=<?=$linha["id"]?>">Excluir</a></td>
             </tr>
         <?php
         }
