@@ -6,11 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="inserirOk.php" method="POST" enctype="multipart/form-data">
-        <div>
-            <label for="nome">Nome:</label>
-            <input type="text" name="nome" id="nome"/>
-        </div>
+    <h1>Login</h1>
+    <form action="loginOk.php" method="post">
         <div>
             <label for="email">Email:</label>
             <input type="email" name="email" id="email"/>
@@ -20,10 +17,8 @@
             <input type="password" name="senha" id="senha"/>
         </div>
         <div>
-            <label for="imagem">Foto:</label>
-            <input type="file" name="imagem" id="imagem"/>
+            <button type="submit">Enviar</button>
         </div>
-       <div><button type="submit">Enviar</button></div>
     </form>
 </body>
 </html>

@@ -1,15 +1,14 @@
 <?php
-
+session_start();
+if(!isset($_SESSION["login"])){
+    header("location:../site/login.php");
+}
 include_once "../class/usuario.class.php";
 include_once "../class/usuarioDAO.class.php";
-
 $idusuario = $_GET["id"];
-$objUsuarioDAO = new UsuarioDAO();
-$retorno = $objUsuarioDAO->buscarPorId($idusuario);
-
-
+$objUsuarioDAO = new usuarioDAO();
+$retorno = $objUsuario->buscarPorId($idusuario);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,22 +20,21 @@ $retorno = $objUsuarioDAO->buscarPorId($idusuario);
     <form action="editarOk.php" method="POST">
         <div>
             <label for="nome">Nome:</label>
-            <input type="text" name="nome" id="nome" value="<?=$retorno["nome"]?>">
+            <input type="text" name="nome" 
+            id="nome" value="<?=$retorno["nome"]?>"/>
         </div>
         <div>
             <label for="email">Email:</label>
-            <input type="email" name="email" id="email" value="<?=$retorno["email"]?>">
+            <input type="email" name="email" id="email"
+            value="<?=$retorno["email"]?>"/>
         </div>
         <div>
             <label for="senha">Senha:</label>
-            <input type="password" name="senha" id="senha" value="<?=$retorno["senha"]?>">
-            <input type="hidden" name="id" id="senha" value="<?=$retorno["id"]?>">
-
+            <input type="password" name="senha" id="senha"
+            value="<?=$retorno["senha"]?>"/>
+            <input type="hidden" name="id" value="<?=$retorno["id"]?>"
         </div>
-        <div>
-            <button type="submit">Enviar</button>
-        </div>
-        
+       <div><button type="submit">Enviar</button></div>
     </form>
 </body>
 </html>

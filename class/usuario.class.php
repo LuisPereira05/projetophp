@@ -6,11 +6,12 @@ class usuario{
     private $email;
     private $senha;
 
-    public function setUniversal($key, $value) {
-        $this->$key = $value;
+    private $imagem;
+
+    public function setUniversal($variavel, $valor){
+        $this->$variavel = $valor;
     }
-    public function getUniversal($key) {
-        return $this->$key;
+    public function getUniversal($variavel){
+        return $this->$variavel;
     }
 }
-?>
