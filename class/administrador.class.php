@@ -1,12 +1,10 @@
 <?php
 
-class Usuario{
+class Administrador{
     private $id;
     private $nome;
     private $email;
     private $senha;
-    private $imagem;
-    private $linkedin;
 
     public function setUniversal($variavel, $valor){
         $this->$variavel = $valor;

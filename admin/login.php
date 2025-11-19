@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login Administrador</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <div class="login-container">
         <div class="login-box">
-            <h1>🔐 Login</h1>
-            <p>Acesse sua conta para se candidatar</p>
+            <h1>🔐 Login Administrador</h1>
+            <p>Acesso restrito a administradores</p>
             
             <?php
             if(isset($_GET['erro'])){
@@ -19,11 +19,6 @@
                 }
                 if($_GET['erro'] == 'senha'){
                     echo '<div class="alert alert-error">Senha incorreta!</div>';
-                }
-            }
-            if(isset($_GET['sucesso'])){
-                if($_GET['sucesso'] == 'cadastro'){
-                    echo '<div class="alert alert-success">Cadastro realizado com sucesso! Faça login.</div>';
                 }
             }
             ?>
@@ -39,13 +34,9 @@
                 </div>
                 <div>
                     <button type="submit" class="btn">Entrar</button>
-                    <a href="index.php" class="btn btn-secondary">Voltar</a>
+                    <a href="../site/index.php" class="btn btn-secondary">Voltar ao Site</a>
                 </div>
             </form>
-            
-            <p style="margin-top: 20px; text-align: center;">
-                Não tem uma conta? <a href="cadastro.php" style="color: #667eea; font-weight: 600;">Cadastre-se</a>
-            </p>
         </div>
     </div>
 </body>
