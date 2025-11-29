@@ -148,4 +148,73 @@ class VagaDAO{
         $sql->execute();
         return $sql->rowCount() > 0;
     }
+
+    public function listarComPaginacao($limite, $offset){
+        $sql = $this->conexao->prepare("
+            SELECT v.*, c.nome as categoria_nome 
+            FROM vaga v 
+            INNER JOIN categoria c ON v.categoria_id = c.id 
+            ORDER BY v.created_at DESC
+            LIMIT :limite OFFSET :offset
+        ");
+        $sql->bindValue(":limite", $limite, PDO::PARAM_INT);
+        $sql->bindValue(":offset", $offset, PDO::PARAM_INT);
+        $sql->execute();
+        return $sql->fetchAll();
+    }
+
+    public function listarAtivasComPaginacao($limite, $offset){
+        $sql = $this->conexao->prepare("
+            SELECT v.*, c.nome as categoria_nome 
+            FROM vaga v 
+            INNER JOIN categoria c ON v.categoria_id = c.id 
+            WHERE v.ativa = 1 
+            ORDER BY v.created_at DESC
+            LIMIT :limite OFFSET :offset
+        ");
+        $sql->bindValue(":limite", $limite, PDO::PARAM_INT);
+        $sql->bindValue(":offset", $offset, PDO::PARAM_INT);
+        $sql->execute();
+        return $sql->fetchAll();
+    }
+
+    public function listarPorCategoriaComPaginacao($categoria_id, $limite, $offset){
+        $sql = $this->conexao->prepare("
+            SELECT v.*, c.nome as categoria_nome 
+            FROM vaga v 
+            INNER JOIN categoria c ON v.categoria_id = c.id 
+            WHERE v.ativa = 1 AND v.categoria_id = :categoria_id 
+            ORDER BY v.created_at DESC
+            LIMIT :limite OFFSET :offset
+        ");
+        $sql->bindValue(":categoria_id", $categoria_id);
+        $sql->bindValue(":limite", $limite, PDO::PARAM_INT);
+        $sql->bindValue(":offset", $offset, PDO::PARAM_INT);
+        $sql->execute();
+        return $sql->fetchAll();
+    }
+
+    public function contarAtivas(){
+        $sql = $this->conexao->prepare("
+            SELECT COUNT(*) as total FROM vaga WHERE ativa = 1
+        ");
+        $sql->execute();
+        return $sql->fetch()["total"];
+    }
+
+    public function contarPorCategoria($categoria_id){
+        $sql = $this->conexao->prepare("
+            SELECT COUNT(*) as total FROM vaga 
+            WHERE ativa = 1 AND categoria_id = :categoria_id
+        ");
+        $sql->bindValue(":categoria_id", $categoria_id);
+        $sql->execute();
+        return $sql->fetch()["total"];
+    }
+
+    public function contarTodas(){
+        $sql = $this->conexao->prepare("SELECT COUNT(*) as total FROM vaga");
+        $sql->execute();
+        return $sql->fetch()["total"];
+    }
 }

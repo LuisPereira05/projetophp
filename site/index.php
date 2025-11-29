@@ -6,15 +6,24 @@ include_once "../class/categoriaDAO.class.php";
 $objVagaDAO = new VagaDAO();
 $objCategoriaDAO = new CategoriaDAO();
 
+// Configuração de paginação
+$vagasPorPagina = 10;
+$paginaAtual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+$offset = ($paginaAtual - 1) * $vagasPorPagina;
+
 // Verificar se há filtro por categoria
 $categoria_filtro = isset($_GET['categoria']) ? $_GET['categoria'] : null;
 
+// Buscar vagas e total
 if($categoria_filtro){
-    $vagas = $objVagaDAO->listarPorCategoria($categoria_filtro);
+    $vagas = $objVagaDAO->listarPorCategoriaComPaginacao($categoria_filtro, $vagasPorPagina, $offset);
+    $totalVagas = $objVagaDAO->contarPorCategoria($categoria_filtro);
 } else {
-    $vagas = $objVagaDAO->listarAtivas();
+    $vagas = $objVagaDAO->listarAtivasComPaginacao($vagasPorPagina, $offset);
+    $totalVagas = $objVagaDAO->contarAtivas();
 }
 
+$totalPaginas = ceil($totalVagas / $vagasPorPagina);
 $categorias = $objCategoriaDAO->listar();
 ?>
 <!DOCTYPE html>
@@ -69,7 +78,7 @@ $categorias = $objCategoriaDAO->listar();
             }
             ?>
             
-            <h2 style="margin-bottom: 30px; color: #cacaca;">Vagas Disponíveis</h2>
+            <h2 style="margin-bottom: 30px; color: #cacaca;">Vagas Disponíveis (<?=$totalVagas?> vagas)</h2>
             
             <!-- Filtro por Categoria -->
             <div class="filter-section">
@@ -140,6 +149,54 @@ $categorias = $objCategoriaDAO->listar();
                         </div>
                     </div>
                 <?php endforeach; ?>
+                
+                <!-- Paginação -->
+                <?php if($totalPaginas > 1): ?>
+                    <div class="pagination">
+                        <?php
+                        // Construir URL base mantendo o filtro de categoria
+                        $url_base = "index.php?";
+                        if($categoria_filtro){
+                            $url_base .= "categoria=".$categoria_filtro."&";
+                        }
+                        ?>
+                        
+                        <!-- Botão Anterior -->
+                        <?php if($paginaAtual > 1): ?>
+                            <a href="<?=$url_base?>pagina=<?=($paginaAtual-1)?>" class="pagination-btn">« Anterior</a>
+                        <?php endif; ?>
+                        
+                        <!-- Números das páginas -->
+                        <?php
+                        $inicio = max(1, $paginaAtual - 2);
+                        $fim = min($totalPaginas, $paginaAtual + 2);
+                        
+                        if($inicio > 1){
+                            echo '<a href="'.$url_base.'pagina=1" class="pagination-btn">1</a>';
+                            if($inicio > 2){
+                                echo '<span class="pagination-dots">...</span>';
+                            }
+                        }
+                        
+                        for($i = $inicio; $i <= $fim; $i++){
+                            $active = $i == $paginaAtual ? 'active' : '';
+                            echo '<a href="'.$url_base.'pagina='.$i.'" class="pagination-btn '.$active.'">'.$i.'</a>';
+                        }
+                        
+                        if($fim < $totalPaginas){
+                            if($fim < $totalPaginas - 1){
+                                echo '<span class="pagination-dots">...</span>';
+                            }
+                            echo '<a href="'.$url_base.'pagina='.$totalPaginas.'" class="pagination-btn">'.$totalPaginas.'</a>';
+                        }
+                        ?>
+                        
+                        <!-- Botão Próximo -->
+                        <?php if($paginaAtual < $totalPaginas): ?>
+                            <a href="<?=$url_base?>pagina=<?=($paginaAtual+1)?>" class="pagination-btn">Próximo »</a>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
             <?php endif; ?>
         </div>
     </div>

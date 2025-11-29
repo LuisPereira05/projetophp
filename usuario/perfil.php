@@ -47,9 +47,9 @@ $usuario = $objUsuarioDAO->buscarPorId($idusuario);
             
             <div style="display: flex; align-items: center; gap: 30px; margin-bottom: 30px; flex-wrap: wrap;">
                 <?php if($usuario["imagem"]): ?>
-                    <img src="../img/<?=$usuario["imagem"]?>" alt="Foto de Perfil" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #221f3a;">
+                    <img src="../img/<?=$usuario["imagem"]?>" alt="Foto de Perfil" style="width: 150px; height: 150px;  %; object-fit: cover; border: 4px solid #221f3a;">
                 <?php else: ?>
-                    <img src="https://via.placeholder.com/150" alt="Foto de Perfil" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #221f3a;">
+                    <img src="https://via.placeholder.com/150" alt="Foto de Perfil" style="width: 150px; height: 150px;  %; object-fit: cover; border: 4px solid #221f3a;">
                 <?php endif; ?>
                 
                 <div>
@@ -58,14 +58,14 @@ $usuario = $objUsuarioDAO->buscarPorId($idusuario);
                     <?php if($usuario["linkedin"]): ?>
                         <p style="margin-top: 10px;">
                             <a href="<?=$usuario["linkedin"]?>" target="_blank" class="linkedin-link">
-                                🔗 Ver perfil no LinkedIn
+                                Ver perfil no LinkedIn
                             </a>
                         </p>
                     <?php endif; ?>
                 </div>
             </div>
             
-            <h3 style="margin-top: 40px; margin-bottom: 20px;">Editar Informações</h3>
+            <h3 style="margin-top: 40px; margin-bottom: 20px; color: #cacaca;">Editar Informações</h3>
             
             <form action="perfilOk.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?=$usuario["id"]?>"/>
