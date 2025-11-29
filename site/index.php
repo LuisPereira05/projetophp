@@ -28,7 +28,7 @@ $categorias = $objCategoriaDAO->listar();
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎯 Portal de Vagas</h1>
+            <h1>Portal de Vagas</h1>
             <p>Conectando talentos às melhores oportunidades</p>
         </div>
         
@@ -46,7 +46,7 @@ $categorias = $objCategoriaDAO->listar();
             </div>
             <?php if(isset($_SESSION["login"])): ?>
                 <div>
-                    <span style="margin-right: 15px; font-weight: 600;">Olá, <?=$_SESSION["nome"]?>!</span>
+                    <span style="margin-right: 15px; font-weight: 600; color: #cacaca;">Olá, <?=$_SESSION["nome"]?>!</span>
                     <a href="logout.php" class="nav-btn secondary">Sair</a>
                 </div>
             <?php endif; ?>
@@ -69,7 +69,7 @@ $categorias = $objCategoriaDAO->listar();
             }
             ?>
             
-            <h2 style="margin-bottom: 30px; color: #333;">Vagas Disponíveis</h2>
+            <h2 style="margin-bottom: 30px; color: #cacaca;">Vagas Disponíveis</h2>
             
             <!-- Filtro por Categoria -->
             <div class="filter-section">
@@ -120,11 +120,11 @@ $categorias = $objCategoriaDAO->listar();
                         
                         <p class="vaga-descricao"><?=$vaga["descricao"]?></p>
                         
-                        <p style="color: #666; margin: 10px 0;">
+                        <p style="color: #cacaca; margin: 10px 0;">
                             <strong>Requisitos:</strong> <?=$vaga["requisitos"]?>
                         </p>
                         
-                        <p style="color: #666; margin: 10px 0;">
+                        <p style="color: #cacaca; margin: 10px 0;">
                             <strong>Contato:</strong> <?=$vaga["contato_email"]?>
                             <?php if($vaga["contato_telefone"]): ?>
                                 | <?=$vaga["contato_telefone"]?>

@@ -85,11 +85,11 @@ $minhasCandidaturas = $sql->fetchAll();
                             </div>
                         </div>
                         
-                        <p style="color: #666; margin-top: 15px;">
+                        <p style="color: #cacaca; margin-top: 15px;">
                             <strong>Candidatura enviada em:</strong> <?=date('d/m/Y H:i', strtotime($vaga["data_candidatura"]))?>
                         </p>
                         
-                        <p style="color: #666; margin-top: 10px;">
+                        <p style="color: #cacaca; margin-top: 10px;">
                             <strong>Contato:</strong> <?=$vaga["contato_email"]?>
                             <?php if($vaga["contato_telefone"]): ?>
                                 | <?=$vaga["contato_telefone"]?>

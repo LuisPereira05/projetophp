@@ -44,7 +44,7 @@
             </form>
             
             <p style="margin-top: 20px; text-align: center;">
-                Não tem uma conta? <a href="cadastro.php" style="color: #667eea; font-weight: 600;">Cadastre-se</a>
+                Não tem uma conta? <a href="cadastro.php" style="color: #504988ff; font-weight: 600;">Cadastre-se</a>
             </p>
         </div>
     </div>

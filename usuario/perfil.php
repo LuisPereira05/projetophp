@@ -47,14 +47,14 @@ $usuario = $objUsuarioDAO->buscarPorId($idusuario);
             
             <div style="display: flex; align-items: center; gap: 30px; margin-bottom: 30px; flex-wrap: wrap;">
                 <?php if($usuario["imagem"]): ?>
-                    <img src="../img/<?=$usuario["imagem"]?>" alt="Foto de Perfil" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #667eea;">
+                    <img src="../img/<?=$usuario["imagem"]?>" alt="Foto de Perfil" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #221f3a;">
                 <?php else: ?>
-                    <img src="https://via.placeholder.com/150" alt="Foto de Perfil" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #667eea;">
+                    <img src="https://via.placeholder.com/150" alt="Foto de Perfil" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #221f3a;">
                 <?php endif; ?>
                 
                 <div>
                     <h2 style="margin-bottom: 10px;"><?=$usuario["nome"]?></h2>
-                    <p style="color: #666; margin-bottom: 5px;"><strong>E-mail:</strong> <?=$usuario["email"]?></p>
+                    <p style="color: #cacaca; margin-bottom: 5px;"><strong>E-mail:</strong> <?=$usuario["email"]?></p>
                     <?php if($usuario["linkedin"]): ?>
                         <p style="margin-top: 10px;">
                             <a href="<?=$usuario["linkedin"]?>" target="_blank" class="linkedin-link">
@@ -93,7 +93,7 @@ $usuario = $objUsuarioDAO->buscarPorId($idusuario);
                 <div class="form-group">
                     <label for="imagem">Atualizar Foto de Perfil:</label>
                     <input type="file" name="imagem" id="imagem" accept="image/*"/>
-                    <small style="color: #666; display: block; margin-top: 5px;">Deixe em branco para manter a foto atual</small>
+                    <small style="color: #cacaca; display: block; margin-top: 5px;">Deixe em branco para manter a foto atual</small>
                 </div>
                 
                 <div>

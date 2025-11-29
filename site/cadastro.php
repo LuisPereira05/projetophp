@@ -40,7 +40,7 @@
             </form>
             
             <p style="margin-top: 20px; text-align: center;">
-                Já tem uma conta? <a href="login.php" style="color: #667eea; font-weight: 600;">Faça login</a>
+                Já tem uma conta? <a href="login.php" style="color: #504988ff; font-weight: 600;">Faça login</a>
             </p>
         </div>
     </div>
