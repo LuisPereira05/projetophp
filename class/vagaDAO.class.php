@@ -86,7 +86,7 @@ class VagaDAO{
             UPDATE vaga SET titulo=:titulo, descricao=:descricao, requisitos=:requisitos, 
             salario=:salario, localizacao=:localizacao, tipo_contrato=:tipo_contrato, 
             empresa=:empresa, contato_email=:contato_email, contato_telefone=:contato_telefone, 
-            categoria_id=:categoria_id, ativa=:ativa WHERE id=:id
+            categoria_id=:categoria_id, ativa=:ativa, imagem=:imagem WHERE id=:id
         ");
         $sql->bindValue(":titulo", $vaga->getUniversal("titulo"));
         $sql->bindValue(":descricao", $vaga->getUniversal("descricao"));
@@ -99,10 +99,11 @@ class VagaDAO{
         $sql->bindValue(":contato_telefone", $vaga->getUniversal("contato_telefone"));
         $sql->bindValue(":categoria_id", $vaga->getUniversal("categoria_id"));
         $sql->bindValue(":ativa", $vaga->getUniversal("ativa"));
+        $sql->bindValue(":imagem", $vaga->getUniversal("imagem"));
         $sql->bindValue(":id", $vaga->getUniversal("id"));
         return $sql->execute();
     }
-    
+        
     public function alterarStatus($id, $ativa){
         $sql = $this->conexao->prepare("UPDATE vaga SET ativa=:ativa WHERE id=:id");
         $sql->bindValue(":ativa", $ativa);
@@ -111,9 +112,23 @@ class VagaDAO{
     }
     
     public function excluir($id){
+        // Get the vaga to delete its image file
+        $vaga = $this->buscarPorId($id);
+        
+        // Delete the record from database
         $sql = $this->conexao->prepare("DELETE FROM vaga WHERE id=:id");
         $sql->bindValue(":id", $id);
-        return $sql->execute();
+        $resultado = $sql->execute();
+        
+        // If deletion was successful and vaga had an image, delete the image file
+        if($resultado && !empty($vaga["imagem"])){
+            $caminhoImagem = "../img/" . $vaga["imagem"];
+            if(file_exists($caminhoImagem)){
+                unlink($caminhoImagem);
+            }
+        }
+        
+        return $resultado;
     }
     
     public function listarCandidatos($vaga_id){

@@ -40,20 +40,35 @@ class UsuarioDAO{
     public function editar(Usuario $usuario){
         $sql = $this->conexao->prepare("
             UPDATE usuario SET nome=:nome, email=:email, 
-            senha=:senha, linkedin=:linkedin WHERE id=:id
+            senha=:senha, imagem=:imagem, linkedin=:linkedin WHERE id=:id
         ");
         $sql->bindValue(":nome", $usuario->getUniversal("nome"));
         $sql->bindValue(":email", $usuario->getUniversal("email"));
         $sql->bindValue(":senha", $usuario->getUniversal("senha"));
+        $sql->bindValue(":imagem", $usuario->getUniversal("imagem"));
         $sql->bindValue(":linkedin", $usuario->getUniversal("linkedin"));
         $sql->bindValue(":id", $usuario->getUniversal("id"));
         return $sql->execute();
     }
     
     public function excluir($id){
+        // Get the usuario to delete its image file
+        $usuario = $this->buscarPorId($id);
+        
+        // Delete the record from database
         $sql = $this->conexao->prepare("DELETE FROM usuario WHERE id=:id");
         $sql->bindValue(":id", $id);
-        return $sql->execute();
+        $resultado = $sql->execute();
+        
+        // If deletion was successful and usuario had an image, delete the image file
+        if($resultado && !empty($usuario["imagem"])){
+            $caminhoImagem = "../img/" . $usuario["imagem"];
+            if(file_exists($caminhoImagem)){
+                unlink($caminhoImagem);
+            }
+        }
+        
+        return $resultado;
     }
     
     public function login(Usuario $usuario){

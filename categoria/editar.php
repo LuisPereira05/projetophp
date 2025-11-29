@@ -21,23 +21,26 @@ $retorno = $objCategoriaDAO->buscarPorId($idcategoria);
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Editar Categoria</h1>
-        </div>
-        
-        <div class="content">
-            <form action="editarOk.php" method="POST">
-                <div class="form-group">
-                    <label for="nome">Nome da Categoria:</label>
-                    <input type="text" name="nome" id="nome" value="<?=$retorno["nome"]?>" required/>
-                    <input type="hidden" name="id" value="<?=$retorno["id"]?>"/>
-                </div>
-                <div>
-                    <button type="submit" class="btn">Salvar</button>
-                    <a href="listar.php" class="btn btn-secondary">Cancelar</a>
-                </div>
-            </form>
+    <?php include_once "../includes/sidebar.php"; ?>
+    <div class="main-content">
+        <div class="container">
+            <div class="header">
+                <h1>Editar Categoria</h1>
+            </div>
+            
+            <div class="content">
+                <form action="editarOk.php" method="POST">
+                    <div class="form-group">
+                        <label for="nome">Nome da Categoria:</label>
+                        <input type="text" name="nome" id="nome" value="<?=$retorno["nome"]?>" required/>
+                        <input type="hidden" name="id" value="<?=$retorno["id"]?>"/>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn">Salvar</button>
+                        <a href="listar.php" class="btn btn-secondary">Cancelar</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </body>

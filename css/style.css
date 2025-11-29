@@ -75,31 +75,250 @@ body {
     flex-wrap: wrap;
 }
 
-.nav-btn {
-    padding: 10px 20px;
-    background: rgb(56, 46, 80);
-    color: white;
-    border: 1px solid white;
-     ;
-    cursor: pointer;
-    font-size: 0.95em;
-    transition: all 0.3s;
+/* Remove or comment out the old .nav styles and add these: */
+
+/* Sidebar Navigation */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    background: #1a1525;
+    padding: 20px 0;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    padding: 0 20px 20px 20px;
+    border-bottom: 1px solid #2d2438;
+}
+
+.sidebar-logo {
+    color: #cacaca;
+    font-size: 1.5em;
+    font-weight: bold;
     text-decoration: none;
-    display: inline-block;
+    display: block;
 }
 
-.nav-btn:hover {
-    background: #281c33;
-    transform: translateY(-2px);
+.sidebar-nav {
+    padding: 20px 0;
 }
 
-.nav-btn.secondary {
-    background: #0e161d;
+.sidebar-nav a {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: #cacaca;
+    text-decoration: none;
+    transition: all 0.3s;
+    border-left: 3px solid transparent;
 }
 
-.nav-btn.secondary:hover {
-    background: #5a6268;
+.sidebar-nav a:hover {
+    background: #221f3a;
+    border-left-color: #504988;
 }
+
+.sidebar-nav a.active {
+    background: #221f3a;
+    border-left-color: #504988;
+    color: white;
+}
+
+.sidebar-toggle {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: #221f3a;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.sidebar-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2px;
+    border-top: 1px solid #2d2438;
+    background: #201a2b;
+}
+
+.sidebar-footer a {
+    display: block;
+    padding: 4px 6px;
+    color: #9b87f5;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.sidebar-footer a:hover {
+    background: #2d2438;
+    color: #fff;
+}
+
+/* Top Bar for User Profile */
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 250px;
+    right: 0;
+    height: 70px;
+    background: #1a1525;
+    border-bottom: 1px solid #2d2438;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 30px;
+    z-index: 999;
+}
+
+.user-menu {
+    position: relative;
+}
+
+.user-menu-toggle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: transparent;
+    border: none;
+    color: #cacaca;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.user-menu-toggle:hover {
+    background: #221f3a;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #504988;
+}
+
+.user-name {
+    font-weight: 600;
+    color: #cacaca;
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 10px;
+    background: #1a1525;
+    border: 1px solid #2d2438;
+    border-radius: 8px;
+    min-width: 200px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    display: none;
+}
+
+.user-dropdown.show {
+    display: block;
+}
+
+.user-dropdown a,
+.user-dropdown button {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    color: #cacaca;
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1em;
+}
+
+.user-dropdown a:hover,
+.user-dropdown button:hover {
+    background: #221f3a;
+}
+
+.user-dropdown .divider {
+    height: 1px;
+    background: #2d2438;
+    margin: 5px 0;
+}
+
+/* Guest Buttons (Login/Register) */
+.guest-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* Main Content Area Adjustment */
+.main-content {
+    margin-left: 250px;
+    margin-top: 70px;
+    min-height: calc(100vh - 70px);
+}
+
+.container {
+    margin-left: 0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .sidebar-header {
+        padding-left: 75px;
+    }
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+    }
+
+    .sidebar-toggle {
+        display: block;
+    }
+
+    .topbar {
+        left: 0;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+
+    .sidebar-overlay.show {
+        display: block;
+    }
+}
+
 
 .content {
     padding: 40px;
@@ -268,6 +487,20 @@ body {
     margin: 20px 0;
 }
 
+.vaga-imagem {
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.vaga-imagem img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
 .info-item {
     display: flex;
     align-items: center;
@@ -339,7 +572,6 @@ table tr:hover td {
 .candidato-foto {
     width: 80px;
     height: 80px;
-     %;
     object-fit: cover;
     border: 3px solid #221f3a;
 }
@@ -470,19 +702,6 @@ table tr:hover td {
 
     .vaga-info {
         grid-template-columns: 1fr;
-    }
-
-    .nav {
-        flex-direction: column;
-    }
-
-    .nav-links {
-        width: 100%;
-        flex-direction: column;
-    }
-
-    .nav-btn {
-        width: 100%;
     }
 
     table {
